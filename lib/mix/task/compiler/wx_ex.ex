@@ -148,7 +148,9 @@ defmodule Mix.Tasks.Compile.WxEx do
   end
 
   def clean do
-    File.rm_rf!(@wx_constants_erl_path)
-    File.rm_rf!(@wx_constants_ex_path)
+    Enum.each(
+      [@gl_constants_erl_path, @wx_constants_erl_path, @gl_constants_ex_path, @wx_constants_ex_path],
+      &File.rm_rf!/1
+    )
   end
 end
