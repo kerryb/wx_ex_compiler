@@ -9,13 +9,13 @@ defmodule Mix.Tasks.Compile.WxEx do
   @shared_constants_root "src"
   @shared_constants_ex_root "lib/generated/wx_ex"
 
-  @wx_header_path @shared_header_root |> Path.join("wx.hrl")
-  @wx_constants_erl_path @shared_constants_root |> Path.join("wx_constants.erl")
-  @wx_constants_ex_path @shared_constants_ex_root |> Path.join("wx_constants.ex")
+  @wx_header_path Path.join(@shared_header_root, "wx.hrl")
+  @wx_constants_erl_path Path.join(@shared_constants_root, "wx_constants.erl")
+  @wx_constants_ex_path Path.join(@shared_constants_ex_root, "wx_constants.ex")
 
-  @gl_header_path @shared_header_root |> Path.join("gl.hrl")
-  @gl_constants_erl_path @shared_constants_root |> Path.join("gl_constants.erl")
-  @gl_constants_ex_path @shared_constants_ex_root |> Path.join("gl_constants.ex")
+  @gl_header_path Path.join(@shared_header_root, "gl.hrl")
+  @gl_constants_erl_path Path.join(@shared_constants_root, "gl_constants.erl")
+  @gl_constants_ex_path Path.join(@shared_constants_ex_root, "gl_constants.ex")
 
   def run(_args) do
     @wx_constants_erl_path |> Path.dirname() |> File.mkdir_p!()

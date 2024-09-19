@@ -27,7 +27,8 @@ defmodule WxExCompiler.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.31", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.31", only: :dev, runtime: false},
+      {:styler, "> 0.0.0", optional: true, only: [:dev, :test], runtime: false}
     ]
   end
 
