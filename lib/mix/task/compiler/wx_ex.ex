@@ -17,6 +17,8 @@ defmodule Mix.Tasks.Compile.WxEx do
   @gl_constants_erl_path Path.join(@shared_constants_root, "gl_constants.erl")
   @gl_constants_ex_path Path.join(@shared_constants_ex_root, "gl_constants.ex")
 
+  @generated_files [@gl_constants_erl_path, @wx_constants_erl_path, @gl_constants_ex_path, @wx_constants_ex_path]
+
   def run(_args) do
     @wx_constants_erl_path |> Path.dirname() |> File.mkdir_p!()
     wx_erl_constants = File.open!(@wx_constants_erl_path, [:write])
@@ -59,6 +61,7 @@ defmodule Mix.Tasks.Compile.WxEx do
     File.close(wx_ex_constants)
     File.close(gl_erl_constants)
     File.close(gl_ex_constants)
+    Mix.Tasks.Format.run([Path.join([@shared_constants_ex_root, "**", "*.ex"])])
     :ok
   end
 
@@ -148,9 +151,6 @@ defmodule Mix.Tasks.Compile.WxEx do
   end
 
   def clean do
-    Enum.each(
-      [@gl_constants_erl_path, @wx_constants_erl_path, @gl_constants_ex_path, @wx_constants_ex_path],
-      &File.rm_rf!/1
-    )
+    Enum.each(@generated_files, &File.rm_rf!/1)
   end
 end
