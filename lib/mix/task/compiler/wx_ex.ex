@@ -65,7 +65,6 @@ defmodule Mix.Tasks.Compile.WxEx do
     File.close(wx_ex_file)
     File.close(gl_ex_file)
 
-    Mix.Tasks.Format.run([Path.join([@generated_ex_root, "**", "*.ex"])])
     :ok
   end
 
@@ -139,11 +138,23 @@ defmodule Mix.Tasks.Compile.WxEx do
   end
 
   defp generate_ex_function(line, :wx) do
-    String.replace(line, ~r/-define\((wx)(\w*).*/i, "  def wx\\2, do: :wx_constants.wx\\2()")
+    line
+    |> String.replace(~r/-define\((wx)(\w*).*/i, "  def wx\\2, do: :wx_constants.wx\\2()")
+    |> wrap_long_lines()
   end
 
   defp generate_ex_function(line, :gl) do
-    String.replace(line, ~r/-define\((gl)(\w*).*/i, "  def gl\\2, do: :gl_constants.gl\\2()")
+    line
+    |> String.replace(~r/-define\((gl)(\w*).*/i, "  def gl\\2, do: :gl_constants.gl\\2()")
+    |> wrap_long_lines()
+  end
+
+  defp wrap_long_lines(line) do
+    if String.length(line) > 122 do
+      String.replace(line, ", do:", ",\n    do:")
+    else
+      line
+    end
   end
 
   def clean do
