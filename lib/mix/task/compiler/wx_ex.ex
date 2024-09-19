@@ -1,7 +1,9 @@
 defmodule Mix.Tasks.Compile.WxEx do
   @moduledoc """
-  Compiler to produce an erlang source file in `src/wx_constants.erl`,
-  containing wrapper functions for all the wxWidgets static macros.
+  Compiler to produce Erlang and Elixir source files containing wrapper
+  functions for all the wxWidgets and OpenGL static macros.
+
+  Used internally by [wx_ex](https://hex.pm/packages/wx_ex).
   """
   use Mix.Task.Compiler
 
