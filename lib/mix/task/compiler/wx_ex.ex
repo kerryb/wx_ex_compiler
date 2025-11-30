@@ -139,13 +139,13 @@ defmodule Mix.Tasks.Compile.WxEx do
 
   defp generate_ex_function(line, :wx) do
     line
-    |> String.replace(~r/-define\((wx)(\w*).*/i, "  def wx\\2, do: :wx_constants.wx\\2()")
+    |> String.replace(~r/-define\((wx)(\w*).*/i, "  defmacro wx\\2, do: :wx_constants.wx\\2()")
     |> wrap_long_lines()
   end
 
   defp generate_ex_function(line, :gl) do
     line
-    |> String.replace(~r/-define\((gl)(\w*).*/i, "  def gl\\2, do: :gl_constants.gl\\2()")
+    |> String.replace(~r/-define\((gl)(\w*).*/i, "  defmacro gl\\2, do: :gl_constants.gl\\2()")
     |> wrap_long_lines()
   end
 
